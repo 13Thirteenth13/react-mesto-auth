@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Route } from 'react-router-dom';
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
@@ -8,6 +9,8 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import Login from './Login';
+import Register from "./Register";
 import api from "../utils/api";
 
 function App() {
@@ -141,16 +144,27 @@ function App() {
       <div className="page">
         <Header />
 
-        <Main
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Route path="/main">
+          <Main
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+        </Route>
+
         <Footer />
+
+        <Route path="/login">
+          <Login />
+        </Route>
+
+        <Route path="/register">
+          <Register />
+        </Route>
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
