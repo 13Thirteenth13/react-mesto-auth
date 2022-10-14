@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, userEmail, onSignOut }) {
   const location = useLocation();
 
   return (
@@ -19,10 +19,10 @@ function Header({ loggedIn }) {
       )}
       {loggedIn && (
         <nav className="header__nav">
-          <span>email@email.ru</span>
-          <Link className="header__sign-out" to="/sign-in">
+          <span>{userEmail}</span>
+          <button className="header__sign-out" onClick={() => onSignOut()}>
             Выйти
-          </Link>
+          </button>
         </nav>
       )}
     </header>

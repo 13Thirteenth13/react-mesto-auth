@@ -12,7 +12,7 @@ function PopupWithForm(props) {
         />
         <h3 className="popup__heading">{props.heading}</h3>
         <form
-          className="popup__form"
+          className="popup__form form"
           name={`${props.name}`}
           action="#"
           onSubmit={props.onSubmit}>

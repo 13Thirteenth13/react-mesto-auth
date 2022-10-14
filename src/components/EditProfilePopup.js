@@ -17,7 +17,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
   };
 
   useEffect(() => {
-    currentUser ? resetForm(currentUser) : resetForm()
+    currentUser ? resetForm(currentUser) : resetForm();
   }, [resetForm, isOpen, currentUser]);
 
   return (
@@ -39,10 +39,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           placeholder="Имя"
           minLength="2"
           maxLength="40"
-          value={enteredValues.name || ""}
+          value={enteredValues.name || ''}
           onChange={handleChange}
           required />
-        {errors.name && <span className="popup__error name-error">{errors.name}</span>}
+        {errors.name && (
+        <span className="popup__error name-error">{errors.name}</span>
+        )}
         <input
           className="popup__input"
           name="about"
@@ -51,10 +53,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           placeholder="О себе"
           minLength="2"
           maxLength="200"
-          value={enteredValues.about || ""}
+          value={enteredValues.about || ''}
           onChange={handleChange}
           required />
-        {errors.about && <span className="popup__error description-error">{errors.about}</span>}
+        {errors.about && (
+        <span className="popup__error description-error">{errors.about}</span>
+        )}
       </>
     </PopupWithForm>
   );

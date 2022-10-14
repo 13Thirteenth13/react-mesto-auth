@@ -39,6 +39,7 @@
 @import url(./blocks/auth/__heading/auth__heading.css);
 @import url(./blocks/auth/__form/auth__form.css);
 @import url(./blocks/auth/__login-hint/auth__login-hint.css);
+@import url(./blocks/auth/__error/auth__error.css);
 /* footer */
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);

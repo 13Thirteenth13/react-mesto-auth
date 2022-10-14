@@ -1,5 +1,5 @@
-import successIcon from '../images/success-icon.svg';
-import failIcon from '../images/fail-icon.svg';
+import successIcon from "../images/success-icon.svg";
+import failIcon from "../images/fail-icon.svg";
 
 const InfoTooltip = ({ isOpen, onClose, isSuccess }) => {
   return (

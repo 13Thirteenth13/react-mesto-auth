@@ -1,51 +1,42 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import useForm from '../hooks/useForm';
+import { Link } from "react-router-dom";
 
 function Register({ onRegister }) {
-  const [registerData, setRegisterData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setRegisterData({
-      ...registerData,
-      [name]: value,
-    });
-  };
+  const { enteredValues, errors, handleChange } = useForm();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onRegister(registerData);
+    onRegister(enteredValues);
   };
 
   return (
     <>
       <div className="auth">
         <h2 className="auth__heading">Регистрация</h2>
-        <form className="auth__form" onSubmit={handleSubmit}>
+        <form className="auth__form form" onSubmit={handleSubmit} noValidate>
           <input
             name="email"
             id="email"
             type="email"
             placeholder="Email"
             autoComplete="email"
-            value={registerData.email}
+            value={enteredValues.email || ''}
             onChange={handleChange}
             required
           />
+           <span className="auth__error">{errors.email}</span>
           <input
             name="password"
             id="password"
             type="password"
-            min="8"
+            minLength="8"
             placeholder="Пароль"
             autoComplete="password"
-            value={registerData.password}
+            value={enteredValues.password || ''}
             onChange={handleChange}
             required
           />
+          <span className="auth__error">{errors.password}</span>
           <button type="submit">Зарегистрироваться</button>
         </form>
       </div>

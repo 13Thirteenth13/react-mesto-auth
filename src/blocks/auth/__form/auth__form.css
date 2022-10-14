@@ -36,10 +36,6 @@
   color: #ccc;
 }
 
-.auth__form input:first-of-type {
-  margin-bottom: 30px;
-}
-
 .auth__form button {
   font-family: 'Inter', Arial, sans-serif;
   width: 358px;
@@ -54,7 +50,7 @@
   border: none;
   border-radius: 2px;
   transition: 0.8s ease;
-  margin: 216px 0 0;
+  margin: 176px 0 0;
   padding: 0;
 }
 

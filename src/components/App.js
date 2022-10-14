@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
@@ -10,18 +10,19 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
-import Login from './Login';
+import Login from "./Login";
 import Register from "./Register";
-import InfoTooltip from './InfoTooltip';
-import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from "./InfoTooltip";
+import ProtectedRoute from "./ProtectedRoute";
 
-import * as auth from '../utils/auth';
-import api from '../utils/api';
+import * as auth from "../utils/auth";
+import api from "../utils/api";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
     useState(false);
+  const [authorizationEmail, setAuthorizationEmail] = useState('');
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -178,6 +179,7 @@ function App() {
       .then((data) => {
         setIsLoggedIn(true);
         localStorage.setItem('jwt', data.token);
+        handleTokenCheck();
         history.push('/');
       })
       .catch((err) => {
@@ -186,10 +188,45 @@ function App() {
       });
   };
 
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('jwt');
+    history.push('/sign-in');
+  };
+
+  const handleTokenCheck = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      return;
+    }
+    auth
+      .getContent(jwt)
+      .then((data) => {
+        setAuthorizationEmail(data.data.email);
+        setIsLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push('/');
+    }
+  }, [isLoggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-      <Header loggedIn={isLoggedIn} />
+        <Header
+          loggedIn={isLoggedIn}
+          userEmail={authorizationEmail}
+          onSignOut={handleSignOut}
+        />
 
         <Switch>
           <Route path="/sign-in">

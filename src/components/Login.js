@@ -1,50 +1,45 @@
-import { useState } from 'react';
+import useForm from '../hooks/useForm';
 
 const Login = ({ onLogin }) => {
-  const [loginData, setLoginData] = useState({});
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setLoginData({
-      ...loginData,
-      [name]: value,
-    });
-  };
+  const { enteredValues, errors, handleChange } = useForm({});
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!loginData.email || !loginData.password) {
+    if (!enteredValues.email || !enteredValues.password) {
       return;
     }
-    onLogin(loginData);
+    onLogin(enteredValues);
   };
 
   return (
     <div className="auth">
       <h2 className="auth__heading">Вход</h2>
-      <form className="auth__form" onSubmit={handleSubmit}>
+      <form className="auth__form form" onSubmit={handleSubmit} noValidate>
         <input
           name="email"
           id="email"
           type="email"
           autoComplete="email"
           placeholder="Email"
-          value={loginData.email || ''}
+          value={enteredValues.email || ''}
           onChange={handleChange}
           required
         />
+        <span className="auth__error">{errors.email}</span>
         <input
           name="password"
           id="password"
           type="password"
           autoComplete="password"
           placeholder="Пароль"
-          min="8"
-          value={loginData.password || ''}
+          minLength="8"
+          value={enteredValues.password || ''}
           onChange={handleChange}
           required
         />
+        <span className="auth__error">{errors.password}</span>
         <button type="submit">Войти</button>
+        <span className="auth__login-hint"></span>
       </form>
     </div>
   )
