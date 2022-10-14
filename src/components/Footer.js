@@ -1,9 +1,11 @@
 import React from "react";
 
-function Footer() {
+function Footer({ loggedIn }) {
+
+
   return (
     <footer className="footer">
-      <p className="footer__copyright">&copy; 2022 Mesto Russia</p>
+      {loggedIn && (<p className="footer__copyright">&copy; 2022 Mesto Russia</p>)}
     </footer>
   );
 }

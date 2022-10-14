@@ -8,6 +8,7 @@
   margin: 15px 0 0;
   padding: 0;
   transition: 0.8s ease;
+  text-decoration: none;
 }
 
 .auth__login-hint:hover {

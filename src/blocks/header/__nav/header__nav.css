@@ -1,0 +1,18 @@
+.header__nav {
+  display: flex;
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: 'Inter', Arial, Helvetica;
+}
+
+.header__nav span {
+  margin-right: 24px;
+  color: #fff;
+}
+
+.header__sign-out {
+  color: #a9a9a9;
+  text-decoration: none;
+}
